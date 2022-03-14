@@ -13,7 +13,7 @@ function GetDate({ birthdate, setBirthdate, setHasError }) {
   useEffect(() => {
     if (day && (day < 1 || day > 31)) {
       setHasError(true);
-      setErrorMessage({ ...errorMessage, day: "Choose a day from 1-31" });
+      setErrorMessage({ ...errorMessage, day: "Invalid day" });
     } else {
       setErrorMessage({ ...errorMessage, day: null });
       setHasError(errorMessage.month != null || errorMessage.year != null);
@@ -22,7 +22,7 @@ function GetDate({ birthdate, setBirthdate, setHasError }) {
   useEffect(() => {
     if (month && (month < 1 || month > 12)) {
       setHasError(true);
-      setErrorMessage({ ...errorMessage, month: "Choose a month from 1-12" });
+      setErrorMessage({ ...errorMessage, month: "Invalid month" });
     } else {
       setErrorMessage({ ...errorMessage, month: null });
       setHasError(errorMessage.day != null || errorMessage.year != null);
@@ -33,7 +33,7 @@ function GetDate({ birthdate, setBirthdate, setHasError }) {
       setHasError(true);
       setErrorMessage({
         ...errorMessage,
-        year: "Choose a year from 1800-2200",
+        year: "Invalid Year",
       });
     } else {
       setErrorMessage({ ...errorMessage, year: null });
@@ -48,43 +48,48 @@ function GetDate({ birthdate, setBirthdate, setHasError }) {
     });
   }, [day, month, year]);
   return (
-    <div>
-      <div>Enter Your birth date</div>
-      <div>
-        <ShowErrorMessage errorMessage={errorMessage.day} />
+    <div className="getDate">
+      <div className="getDateText">Enter Your birth date</div>
+      <div className="getDateInputs">
+      <div className="getDateInput">
+        <ShowErrorMessage className="inputError" errorMessage={errorMessage.day} />
         <input
           id="day"
           type="number"
           value={birthdate.day}
+          autoComplete="off"
           placeholder="dd"
           onChange={(e) => {
             setDay(e.target.value);
           }}
         />
       </div>
-      <div>
-        <ShowErrorMessage errorMessage={errorMessage.month} />
+      <div className="getDateInput">
+        <ShowErrorMessage className="inputError" errorMessage={errorMessage.month} />
         <input
           id="month"
           type="number"
           value={birthdate.month}
+          autoComplete="off"
           placeholder="mm"
           onChange={(e) => {
             setMonth(e.target.value);
           }}
         />
       </div>
-      <div>
-        <ShowErrorMessage errorMessage={errorMessage.year} />
+      <div className="getDateInput">
+        <ShowErrorMessage className="inputError" errorMessage={errorMessage.year} />
         <input
           id="year"
           type="number"
           value={birthdate.year}
+          autoComplete="off"
           placeholder="yyyy"
           onChange={(e) => {
             setYear(e.target.value);
           }}
         />
+      </div>
       </div>
     </div>
   );

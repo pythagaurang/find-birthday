@@ -34,7 +34,7 @@ function App() {
   const validDate = (day, month, year) => {
     let dt = new Date(year, month - 1, day),
       valid;
-    if (dt.getDate() !== day || dt.getMonth()!==(month-1)) {
+    if (dt.getDate() !== day || dt.getMonth()!==(month-1) || dt.getFullYear()!==year) {
       valid = false;
     } else {
       valid = true;
@@ -61,7 +61,7 @@ function App() {
     setErrorMessage("");
     if (!day || !year || !month || hasError) {
     } else if(!validDate(day, month, year)) {
-      setErrorMessage("Invalid date.")
+      setErrorMessage("Invalid Date: Check if the month has that many days.")
     } else if (!weekdays.includes(true)){
     } else {
       let dt,
@@ -89,18 +89,27 @@ function App() {
   },[birthdate,weekdays,hasError])
   return (
     <div className="App">
+      <div className="title-logo">
+        Find Birthdays
+      </div>
+      <div className="description">
+        This site will help you find the years in which your birthday occurs on a sunday.
+      </div>
       <GetDate
         birthdate={birthdate}
         setBirthdate={setBirthdate}
         setHasError={setHasError}
       />
+      <ShowErrorMessage className="invalidDateError" errorMessage={errorMessage} />
       <GetWeekdays
         weekdays={weekdays}
         setWeekdays={setWeekdays}
         setHasError={setHasError}
       />
-      <ShowErrorMessage errorMessage={errorMessage} />
       {data.years.length !== 0 && <ShowBirthdays data={data}/>}
+      <div className="footer">
+        <div>Made by <a href="#">@pythagaurang</a></div>
+        </div>
     </div>
   );
 }

@@ -9,11 +9,12 @@ function ShowBirthdays({ data }) {
     "Saturday",
   ];
   return (
-    <div>
+    <div className="showBD">
+      {data.day==29 && data.month==2 && <div>Bruh. 29 feb?</div>}
       {[...Array(7).keys()].filter((i)=>data.years[i].length).map((i) => {
         return (
-          <div>
-            <div>{WEEKDAY[i]}</div>
+          <div className="showBDEachDay">
+            <div className="showBDWeekday">{WEEKDAY[i]}</div>
             <div>
               {data.years[i].reduce((a,b)=>a+", "+b)}
             </div>

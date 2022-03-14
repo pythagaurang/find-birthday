@@ -17,8 +17,9 @@ function GetWeekdays({ weekdays, setWeekdays }) {
     setWeekdays(change);
   };
   return (
-    <div>
-      <div>
+    <div className="getWeekdays">
+    <div className="getWeekdaysRow">
+      <div className="getWeekdaysInput">
         <input
           type="checkbox"
           checked={weekdays[0]}
@@ -26,8 +27,10 @@ function GetWeekdays({ weekdays, setWeekdays }) {
           id="sunday"
           name="sunday"
           value="0"
-        />{" "}
-        Sunday
+        />
+        <label for="sunday">Sun</label>
+      </div>
+      <div className="getWeekdaysInput">
         <input
           type="checkbox"
           checked={weekdays[1]}
@@ -36,7 +39,9 @@ function GetWeekdays({ weekdays, setWeekdays }) {
           name="monday"
           value="1"
         />{" "}
-        Monday
+        <label for="monday">Mon</label>
+        </div>
+      <div className="getWeekdaysInput">
         <input
           type="checkbox"
           checked={weekdays[2]}
@@ -45,7 +50,9 @@ function GetWeekdays({ weekdays, setWeekdays }) {
           name="tuesday"
           value="2"
         />{" "}
-        Tuesday
+        <label for="tuesday">Tue</label>
+        </div>
+      <div className="getWeekdaysInput">
         <input
           type="checkbox"
           checked={weekdays[3]}
@@ -54,7 +61,11 @@ function GetWeekdays({ weekdays, setWeekdays }) {
           name="wednesday"
           value="3"
         />{" "}
-        Wednesday
+        <label for="wednesday">Wed</label>
+        </div>
+        </div>
+    <div className="getWeekdaysRow">
+      <div className="getWeekdaysInput">
         <input
           type="checkbox"
           checked={weekdays[4]}
@@ -63,7 +74,9 @@ function GetWeekdays({ weekdays, setWeekdays }) {
           name="thursday"
           value="4"
         />{" "}
-        Thursday
+        <label for="thursday">Thu</label>
+        </div>
+      <div className="getWeekdaysInput">
         <input
           type="checkbox"
           checked={weekdays[5]}
@@ -72,7 +85,10 @@ function GetWeekdays({ weekdays, setWeekdays }) {
           name="friday"
           value="5"
         />{" "}
-        Friday
+
+        <label for="friday">Fri</label>
+        </div>
+      <div className="getWeekdaysInput">
         <input
           type="checkbox"
           checked={weekdays[6]}
@@ -81,7 +97,9 @@ function GetWeekdays({ weekdays, setWeekdays }) {
           name="saturday"
           value="6"
         />{" "}
-        Saturday
+        <label for="saturday">Sat</label>
+        </div>
+      <div className="getWeekdaysInput all">
         <input
           type="checkbox"
           checked={weekdays.every((v) => v)}
@@ -90,8 +108,10 @@ function GetWeekdays({ weekdays, setWeekdays }) {
           name="all"
           value="all"
         />{" "}
-        All
-      </div>
+        <label for="all">All</label>
+        </div>
+    </div>
+
       {/* < select
             multiple={true}
             value={weekdays}

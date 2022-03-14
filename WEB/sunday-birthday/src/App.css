@@ -95,7 +95,7 @@
 
 }
 .getWeekdaysInput>input:checked+label{
-  box-shadow: 1px 1px 3px 1px rgb(0,0,0,0.2) inset;
+  box-shadow: 1px 1px 3px 1px rgb(0,0,0,0.1) inset;
 }
 .getWeekdaysInput>input:not(:checked)+label{
   opacity: 0.5;

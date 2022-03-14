@@ -47,10 +47,21 @@
 .getDateInput>input{
   width: 100px;
   height: 30px;
+  text-align: center;
   font-size: 1em;
-  border-radius: 6px;
+  border: 1px solid black;
 }
 
+.getDateInput>input::-webkit-outer-spin-button,
+.getDateInput>input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.getDateInput>input[type=number] {
+  -moz-appearance: textfield;
+}
 .inputError{
   font-size: 0.9em;
   height: 21px;

@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import GetDate from "./components/GetDate";
-// import GetWeekdays from "./components/GetWeekdays";
+import GetWeekdays from "./components/GetWeekdays";
 import ShowBirthdays from "./components/ShowBirthdays";
 import ShowErrorMessage from "./components/ShowErrorMessage";
 
 function App() {
   const [birthdate, setBirthdate] = useState({ day: "", month: "", year: "" });
-  // const [weekdays, setWeekdays] = useState([
-  //   true,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  // ]);
+  const [weekdays, setWeekdays] = useState([
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
   const [data, setData] = useState({
     years: {
       0:[],
@@ -62,7 +62,7 @@ function App() {
     if (!day || !year || !month || hasError) {
     } else if(!validDate(day, month, year)) {
       setErrorMessage("Invalid date.")
-    // } else if (!weekdays.includes(true)){
+    } else if (!weekdays.includes(true)){
     } else {
       let dt,
         years = {
@@ -76,8 +76,7 @@ function App() {
         };
       for (let i = year; i < year + 100; i++) {
         dt = new Date(i, month - 1, day);
-        // weekdays[dt.getDay()] &&
-        if ( validDate(day, month, i)) {
+        if ( weekdays[dt.getDay()] && validDate(day, month, i)) {
           years[dt.getDay()].push(i);
         }
       }
@@ -87,7 +86,7 @@ function App() {
         month,
       });
     }
-  },[birthdate,hasError])
+  },[birthdate,weekdays,hasError])
   return (
     <div className="App">
       <GetDate
@@ -95,11 +94,11 @@ function App() {
         setBirthdate={setBirthdate}
         setHasError={setHasError}
       />
-      {/* <GetWeekdays
+      <GetWeekdays
         weekdays={weekdays}
         setWeekdays={setWeekdays}
         setHasError={setHasError}
-      /> */}
+      />
       <ShowErrorMessage errorMessage={errorMessage} />
       {data.years.length !== 0 && <ShowBirthdays data={data}/>}
     </div>

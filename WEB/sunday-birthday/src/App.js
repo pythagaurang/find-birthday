@@ -45,8 +45,9 @@ function App() {
     const day = parseInt(birthdate.day);
     const month = parseInt(birthdate.month);
     const year = parseInt(birthdate.year);
-    setData({
-      ...data,
+    setData(d=>{
+      return {
+      ...d,
       years: {
           0:[],
           1:[],
@@ -56,7 +57,7 @@ function App() {
           5:[],
           6:[]
       }
-    })
+    };})
     setErrorMessage("");
     if (!day || !year || !month || hasError) {
     } else if(!validDate(day, month, year)) {

@@ -108,7 +108,7 @@ function App() {
       />
       {data.years.length !== 0 && <ShowBirthdays data={data}/>}
       <div className="footer">
-        <div>Made by <a href="https://github.com/pythagaurang/find-birthday.git">@pythagaurang</a></div>
+        <div>Made by <a href="https://github.com/pythagaurang/find-birthday.git" target={"_blank"}>@pythagaurang</a></div>
       </div>
     </div>
   );

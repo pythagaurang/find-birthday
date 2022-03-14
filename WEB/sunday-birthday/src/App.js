@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import GetDate from "./components/GetDate";
-import GetWeekdays from "./components/GetWeekdays";
+// import GetWeekdays from "./components/GetWeekdays";
 import ShowBirthdays from "./components/ShowBirthdays";
 import ShowErrorMessage from "./components/ShowErrorMessage";
 
 function App() {
   const [birthdate, setBirthdate] = useState({ day: "", month: "", year: "" });
-  const [weekdays, setWeekdays] = useState([
-    true,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  // const [weekdays, setWeekdays] = useState([
+  //   true,
+  //   false,
+  //   false,
+  //   false,
+  //   false,
+  //   false,
+  //   false,
+  // ]);
   const [data, setData] = useState({
     years: {
       0:[],
@@ -34,7 +34,7 @@ function App() {
   const validDate = (day, month, year) => {
     let dt = new Date(year, month - 1, day),
       valid;
-    if (dt.getDate() !== day || dt.getMonth()!=(month-1)) {
+    if (dt.getDate() !== day || dt.getMonth()!==(month-1)) {
       valid = false;
     } else {
       valid = true;
@@ -61,7 +61,7 @@ function App() {
     if (!day || !year || !month || hasError) {
     } else if(!validDate(day, month, year)) {
       setErrorMessage("Invalid date.")
-    } else if (!weekdays.includes(true)){
+    // } else if (!weekdays.includes(true)){
     } else {
       let dt,
         years = {
@@ -86,7 +86,7 @@ function App() {
         month,
       });
     }
-  },[birthdate,weekdays,hasError])
+  },[birthdate,hasError])
   return (
     <div className="App">
       <GetDate
@@ -100,7 +100,7 @@ function App() {
         setHasError={setHasError}
       /> */}
       <ShowErrorMessage errorMessage={errorMessage} />
-      {data.years.length !== 0 && <ShowBirthdays data={data} weekdays={weekdays}/>}
+      {data.years.length !== 0 && <ShowBirthdays data={data}/>}
     </div>
   );
 }

@@ -10,7 +10,7 @@ function ShowBirthdays({ data }) {
   ];
   return (
     <div className="showBD">
-      {data.day==29 && data.month==2 && <div>Bruh. 29 feb?</div>}
+      {data.day==29 && data.month==2 && <div>Bruh.</div>}
       {[...Array(7).keys()].filter((i)=>data.years[i].length).map((i) => {
         return (
           <div className="showBDEachDay">

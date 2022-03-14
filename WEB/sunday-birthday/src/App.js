@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import GetDate from "./components/GetDate";
 import GetWeekdays from "./components/GetWeekdays";
@@ -17,7 +17,15 @@ function App() {
     false,
   ]);
   const [data, setData] = useState({
-    years: [],
+    years: {
+      0:[],
+      1:[],
+      2:[],
+      3:[],
+      4:[],
+      5:[],
+      6:[]
+    },
     day: null,
     month: null,
   });
@@ -26,35 +34,50 @@ function App() {
   const validDate = (day, month, year) => {
     let dt = new Date(year, month - 1, day),
       valid;
-    if (dt.getDate() !== day) {
+    if (dt.getDate() !== day || dt.getMonth()!=(month-1)) {
       valid = false;
     } else {
       valid = true;
     }
     return valid;
   };
-  const handleSubmit = () => {
+  useEffect(() => {
     const day = parseInt(birthdate.day);
     const month = parseInt(birthdate.month);
     const year = parseInt(birthdate.year);
-    setErrorMessage("");
     setData({
-      years: [],
-    });
-    if (!day || !year || !month) {
-      setErrorMessage("Please enter your birthdate.");
-    } else if (hasError || !validDate(day, month, year)) {
-      setErrorMessage("Enter a valid date");
-    } else if (!weekdays.includes(true)) {
-      setErrorMessage("Choose weekdays to find your birthdays that occur on.");
+      ...data,
+      years: {
+          0:[],
+          1:[],
+          2:[],
+          3:[],
+          4:[],
+          5:[],
+          6:[]
+      }
+    })
+    setErrorMessage("");
+    if (!day || !year || !month || hasError) {
+    } else if(!validDate(day, month, year)) {
+      setErrorMessage("Invalid date.")
+    } else if (!weekdays.includes(true)){
     } else {
-      let c = 0,
-        dt,
-        years = [];
+      let dt,
+        years = {
+          0:[],
+          1:[],
+          2:[],
+          3:[],
+          4:[],
+          5:[],
+          6:[]
+        };
       for (let i = year; i < year + 100; i++) {
         dt = new Date(i, month - 1, day);
-        if (weekdays[dt.getDay()] && validDate(day, month, i)) {
-          years.push({ index: ++c, year: i, day: dt.getDay() });
+        // weekdays[dt.getDay()] &&
+        if ( validDate(day, month, i)) {
+          years[dt.getDay()].push(i);
         }
       }
       setData({
@@ -63,7 +86,7 @@ function App() {
         month,
       });
     }
-  };
+  },[birthdate,weekdays,hasError])
   return (
     <div className="App">
       <GetDate
@@ -71,15 +94,13 @@ function App() {
         setBirthdate={setBirthdate}
         setHasError={setHasError}
       />
-      <GetWeekdays
+      {/* <GetWeekdays
         weekdays={weekdays}
         setWeekdays={setWeekdays}
         setHasError={setHasError}
-      />
-      <button onClick={handleSubmit}>Submit</button>
+      /> */}
       <ShowErrorMessage errorMessage={errorMessage} />
-      {data.years.length !== 0 && <ShowBirthdays data={data} />}
-      {console.log(hasError)}
+      {data.years.length !== 0 && <ShowBirthdays data={data} weekdays={weekdays}/>}
     </div>
   );
 }

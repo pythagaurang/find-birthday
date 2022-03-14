@@ -10,24 +10,16 @@ function ShowBirthdays({ data }) {
   ];
   return (
     <div>
-      <table>
-        <tr>
-          <th>No.</th>
-          <th>Year</th>
-          <th>Day</th>
-        </tr>
-        {data.years.map(({ index, year, day }) => {
-          return (
-            <tr>
-              <td>{index}</td>
-              <td>
-                {data.day}/{data.month}/{year}
-              </td>
-              <td>{WEEKDAY[day]}</td>
-            </tr>
-          );
-        })}
-      </table>
+      {[...Array(7).keys()].filter((i)=>data.years[i].length).map((i) => {
+        return (
+          <div>
+            <div>{WEEKDAY[i]}</div>
+            <div>
+              {data.years[i].reduce((a,b)=>a+", "+b)}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
